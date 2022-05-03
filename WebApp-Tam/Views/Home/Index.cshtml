@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Tuzla Bilişim";
+}
+
+<div class="container-fluid mt-5 p-5 bg-warning text-black text-center">
+    <h2 class="text-danger">Tuzla Bilişim</h2>
+    <h1>A11E - ASP.NET Sitemiz - Mayıs 2022</h1>
+    <p>SQL veritabanı destekli site örneğidir. <br>Üyelik ve yetkilendirme; kategori, ürün ve kampanya düzenleme desteği vardır. <br>Ürün içinde arama yapılabilir, yöneticiye iletişim için mesaj yollanabilir.</p>
+</div>
+<hr />
+<h3>Son Eklenen Ürünler</h3>
+<div class="container mt-5">
+    <div class="row">
+        @{
+            int say0 = 0;
+        }
+        @foreach (var item in Model.Urunler)
+        {
+            <div class="col-sm-4 p-3">
+                <h3 align="center">@item.UrunAdi</h3>
+                <a asp-controller="Urunler" asp-action="Details" asp-route-id="@item.Id"><img src="/uploads/@item.Resmi" class="img-fluid img-thumbnail  rounded-3 mx-auto d-block"></a>
+                <p align="center">@item.Fiyat ₺</p>
+            </div>
+        }
+    </div>
+</div>
+<hr>
+<h3>Kampanyalar</h3>
+<!-- Carousel -->
+<div id="demo" class="carousel slide p-4" data-bs-ride="carousel">
+
+    <!-- Indicators/dots -->
+    @{
+        int say1 = 0;
+    }
+    <div class="carousel-indicators" style="margin-bottom:30px;">
+        @foreach (var item in Model.Kampanyalar)
+        {
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="@say1" @( say1==0 ? "class=active" : "" )></button>
+            say1++;
+        }
+    </div>
+
+    <!-- The slideshow/carousel -->
+    <div class="carousel-inner">
+        @{
+            int say2 = 0;
+        }
+        @foreach (var item in Model.Kampanyalar)
+        {
+            say2++;
+
+            <div class="carousel-item @( say2==1 ? "active" : "" )">
+                <img src="/siteResimleri/@item.Resmi" alt="@item.KampanyaAdi" class="img-fluid img-thumbnail rounded-3 mx-auto d-block" style="width:100%">
+                <div class="carousel-caption">
+                    <h3 class="text-primary"><a asp-controller="Kampanyalar" asp-action="Details" asp-route-id="@item.Id">@item.KampanyaAdi</a></h3>
+                    <p>@item.EklenmeTarihi</p>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Left and right controls/icons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<hr>
+<form method="post" asp-controller="Home" asp-action="MesajYolla" class="m-5 p-2 border">
+    <div class="alert alert-success alert-dismissible m-5">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        @ViewData["mesajUyari"]
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="email" class="form-label">Epostanız:</label>
+        <input type="email" class="form-control" id="email" placeholder="Eposta Adresiniz" name="email">
+    </div>
+    <div class="mb-3">
+        <label for="pwd" class="form-label">Mesajınız:</label>
+        <textarea class="form-control" placeholder="Mesajınız" name="mesaj"></textarea>
+    </div>
+    <div class="form-check mb-3">
+        <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" name="onay">Mesajımda sorun yoktur
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Yolla</button>
+</form>

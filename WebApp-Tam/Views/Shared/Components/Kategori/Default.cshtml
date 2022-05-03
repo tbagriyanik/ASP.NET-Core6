@@ -1,0 +1,5 @@
+﻿@model IEnumerable<WebApp_Tam.Models.Kategori>
+@foreach (var item in Model)
+{
+    <a class="dropdown-item" asp-controller="Kategoriler" asp-action="KategoriGetir" asp-route-id="@item.Id">@item.KategoriAdi</a>
+}

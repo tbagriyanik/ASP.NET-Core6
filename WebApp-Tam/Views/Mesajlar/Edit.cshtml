@@ -1,0 +1,49 @@
+﻿@model WebApp_Tam.Models.Mesaj
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Mesaj</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="yollayanMaili" class="control-label"></label>
+                <input asp-for="yollayanMaili" class="form-control" />
+                <span asp-validation-for="yollayanMaili" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mesaji" class="control-label"></label>
+                <input asp-for="Mesaji" class="form-control" />
+                <span asp-validation-for="Mesaji" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="yollanmaTarihi" class="control-label"></label>
+                <input asp-for="yollanmaTarihi" class="form-control" />
+                <span asp-validation-for="yollanmaTarihi" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="okunduMu" /> @Html.DisplayNameFor(model => model.okunduMu)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

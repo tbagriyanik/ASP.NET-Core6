@@ -1,0 +1,14 @@
+﻿@model IEnumerable<WebApp_Tam.Models.Mesaj>
+@{
+    Layout = "_Layout";
+}
+
+<h1>Yönetim Sayfaları : </h1>
+<a asp-controller="Kategoriler" asp-action="Index">Kategoriler</a>
+<br />
+<a asp-controller="Urunler" asp-action="Index">Ürünler</a>
+<br />
+<a asp-controller="Kampanyalar" asp-action="Index">Kampanyalar</a>
+<br />
+<a asp-controller="Mesajlar" asp-action="Index">Mesajlar <span class="badge border border-rounded text-dark box-shadow">@Model.Count()</span></a>
+<br />
